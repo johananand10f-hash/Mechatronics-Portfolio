@@ -6,21 +6,23 @@
     <title>Johan | Mechatronics Portfolio</title>
     <style>
         :root {
-            --bg: #1a2a3a; /* Deep Blueprint Blue */
-            --accent: #00e5ff; /* Cyan Schematic Glow */
+            --bg: #050505; /* Deep Obsidian */
+            --accent: #8b5cf6; /* Electric Violet */
             --text: #ffffff;
-            --text-dim: #b0c4de;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --transition: all 0.3s ease-in-out;
+            --text-dim: #94a3b8;
+            --card-bg: #111111;
+            --card-border: #222222;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Consolas', 'Courier New', monospace; /* Monospace for engineering feel */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
@@ -33,154 +35,205 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background-image: 
-                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px; /* Technical Grid Pattern */
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #050505 100%);
         }
 
-        h1 { font-size: clamp(3rem, 12vw, 6rem); color: var(--accent); border-bottom: 2px solid var(--accent); margin-bottom: 10px; }
-        .hero-sub { font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-dim); }
-        .hero-intro { max-width: 800px; padding: 20px; border: 1px dashed var(--accent); background: rgba(0,0,0,0.2); }
+        .hero-label { color: var(--accent); text-transform: uppercase; letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 1rem; font-weight: 700; }
+        h1 { font-size: clamp(3.5rem, 12vw, 6.5rem); font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -3px; }
+        .hero-sub { font-size: 1.4rem; color: var(--text-dim); margin-bottom: 2rem; font-weight: 300; }
+        
+        .hero-intro {
+            max-width: 750px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-dim);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
 
-        /* Navigation */
-        .btn-group { display: flex; gap: 20px; margin-top: 2rem; }
-        .btn { padding: 10px 25px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; transition: var(--transition); text-transform: uppercase; }
-        .btn:hover { background: var(--accent); color: var(--bg); font-weight: bold; box-shadow: 0 0 15px var(--accent); }
+        /* Buttons */
+        .btn-group { display: flex; gap: 20px; margin-top: 1rem; }
+        .btn { padding: 14px 34px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: var(--transition); cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; }
+        .btn-primary { background-color: var(--accent); color: white; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); }
+        .btn-secondary { border: 1px solid var(--card-border); color: var(--text); }
+        .btn-secondary:hover { background: white; color: black; border-color: white; }
 
-        /* General Sections */
-        .section { min-height: 100vh; padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
-        h2 { color: var(--accent); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; text-align: center; }
+        /* General Section Styling */
+        .section { min-height: 100vh; padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 2.8rem; margin-bottom: 4rem; text-align: center; font-weight: 800; letter-spacing: -1px; }
 
-        /* Interactive Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* Grid Layouts */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 4rem; }
         .card { 
-            background: var(--card-bg); border: 1px solid rgba(0, 229, 255, 0.2); padding: 30px; 
-            cursor: pointer; position: relative; transition: var(--transition);
+            background: var(--card-bg); border: 1px solid var(--card-border); padding: 2.5rem; 
+            border-radius: 0; cursor: pointer; transition: var(--transition); 
         }
-        .card:hover { border-color: var(--accent); transform: scale(1.02); background: rgba(0, 229, 255, 0.1); }
-        .card::before { content: "[ID-01]"; font-size: 0.6rem; color: var(--accent); position: absolute; top: 10px; left: 10px; }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); background: #161616; }
+        .card h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent); }
 
         /* Skills Layout */
-        .skill-group { margin-bottom: 40px; }
+        .skill-group { margin-bottom: 4rem; }
+        h3 { margin-bottom: 2rem; color: var(--text); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.6; }
         .skills-container { display: flex; flex-wrap: wrap; gap: 15px; }
         .skill-tag { 
-            padding: 5px 15px; border: 1px solid var(--text-dim); border-radius: 0; 
-            color: var(--text-dim); cursor: pointer; transition: var(--transition); 
+            padding: 10px 24px; border: 1px solid var(--card-border); 
+            color: var(--text-dim); cursor: pointer; transition: var(--transition); font-weight: 500;
         }
-        .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+        .skill-tag:hover { border-color: var(--accent); color: var(--text); background: rgba(139, 92, 246, 0.1); }
 
-        /* Career Goals Section */
-        #vision { border: 1px solid var(--accent); padding: 40px; background: rgba(0, 229, 255, 0.02); text-align: center; }
+        /* Conclusion & Goals Section */
+        #goals { text-align: center; background: #080808; border: 1px solid var(--card-border); padding: 80px 40px; border-radius: 8px; }
 
-        /* Modal Popup */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; }
-        .modal-content { border: 2px solid var(--accent); margin: 15% auto; padding: 40px; max-width: 600px; background: var(--bg); }
-        .close { float: right; cursor: pointer; color: var(--accent); font-size: 1.5rem; }
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; backdrop-filter: blur(10px); }
+        .modal-content { background: var(--card-bg); margin: 10% auto; padding: 4rem; border-radius: 4px; max-width: 650px; width: 90%; border: 1px solid var(--accent); }
+        .close { float: right; cursor: pointer; font-size: 2.5rem; color: var(--text-dim); line-height: 1; }
+        .close:hover { color: var(--accent); }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(0, 229, 255, 0.2); font-size: 0.8rem; }
+        footer { padding: 60px; text-align: center; color: #444; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <section id="hero">
+        <div class="hero-label">Mechatronics Engineering Portfolio</div>
         <h1>JOHAN</h1>
-        <p class="hero-sub">Mechatronics Engineer | Robotics Specialist</p>
-        <div class="hero-intro">
+        <p class="hero-sub">Embedded Systems | Robotics Enthusiast</p>
+        <p class="hero-intro">
             I am a third-year Mechatronics Engineering student at Lovely Professional University. 
-            I specialize in bridging the gap between hardware and software to solve complex automation problems.
-        </div>
+            My work is driven by a passion for robotics and industrial automation, bridging the gap between hardware and intelligent software.
+        </p>
         <div class="btn-group">
-            <a href="#projects" class="btn">View System Log</a>
-            <a href="#vision" class="btn">Mission Vision</a>
+            <a href="#projects" class="btn btn-primary">Projects</a>
+            <a href="#skills" class="btn btn-secondary">Expertise</a>
+            <a href="#goals" class="btn btn-secondary">Vision</a>
         </div>
     </section>
 
     <section id="projects" class="section">
-        <h2>Technical Projects</h2>
+        <h2>Engineering Projects</h2>
         <div class="grid">
             <div class="card" onclick="openModal('line')">
                 <h4>Line Following Robot</h4>
-                <p>Autonomous navigation using IR sensor arrays and PID logic.</p>
+                <p>Autonomous path tracking using PID algorithms and IR sensor arrays.</p>
             </div>
             <div class="card" onclick="openModal('calc')">
-                <h4>Binary Calculator</h4>
-                <p>Digital hardware implementation of binary arithmetic using logic gates.</p>
+                <h4>Binary Arithmetic Calculator</h4>
+                <p>Digital hardware realization of 4-bit logic operations using fundamental gates.</p>
             </div>
             <div class="card" onclick="openModal('fea')">
-                <h4>Mechanical FEA</h4>
-                <p>Structural analysis of machine elements like knuckle joints using SimScale.</p>
+                <h4>Mechanical Design & FEA</h4>
+                <p>Structural analysis of mechanical joints including Knuckle Joints and Bell Crank Levers using SimScale.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions" class="section">
+        <h2>Competitive Robotics</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('robirace')">
+                <h4>Cognitia - Robi Race</h4>
+                <p>High-speed autonomous obstacle navigation and path optimization.</p>
+            </div>
+            <div class="card" onclick="openModal('robosoccer')">
+                <h4>Cognitia - Robo Soccer</h4>
+                <p>Dynamic multi-robot coordination for competitive sports engineering.</p>
+            </div>
+            <div class="card" onclick="openModal('robosumo')">
+                <h4>Cognitia - Robo Sumo</h4>
+                <p>Design for high-torque pushing and defensive structural integrity.</p>
+            </div>
+            <div class="card" onclick="openModal('mechdesign')">
+                <h4>Mechanical Design Challenge</h4>
+                <p>CAD modeling and structural simulation of industrial machine elements.</p>
             </div>
         </div>
     </section>
 
     <section id="skills" class="section">
-        <h2>Skill Parameters</h2>
+        <h2>Technical Skill Set</h2>
+        
         <div class="skill-group">
-            <h3>[Software_Stack]</h3>
+            <h3>Software & Programming</h3>
             <div class="skills-container">
-                <span class="skill-tag" onclick="openModal('python')">Python</span>
-                <span class="skill-tag" onclick="openModal('matlab')">MATLAB/Simulink</span>
-                <span class="skill-tag" onclick="openModal('sql')">SQL</span>
-                <span class="skill-tag" onclick="openModal('simscale')">SimScale FEA</span>
+                <div class="skill-tag" onclick="openModal('python')">Python</div>
+                <div class="skill-tag" onclick="openModal('cpp')">C / C++</div>
+                <div class="skill-tag" onclick="openModal('matlab')">MATLAB & Simulink</div>
+                <div class="skill-tag" onclick="openModal('sql')">SQL</div>
+                <div class="skill-tag" onclick="openModal('cad')">SolidWorks / AutoCAD</div>
+                <div class="skill-tag" onclick="openModal('simscale')">SimScale FEA</div>
             </div>
         </div>
+
         <div class="skill-group">
-            <h3>[Hardware_Architecture]</h3>
+            <h3>Hardware & Engineering</h3>
             <div class="skills-container">
-                <span class="skill-tag" onclick="openModal('micro')">Microcontrollers (Arduino/ESP32)</span>
-                <span class="skill-tag" onclick="openModal('control')">Control Systems</span>
-                <span class="skill-tag" onclick="openModal('manipulation')">Robot Manipulation</span>
+                <div class="skill-tag" onclick="openModal('micro')">Microcontrollers (Arduino/ESP32)</div>
+                <div class="skill-tag" onclick="openModal('control')">Control Systems</div>
+                <div class="skill-tag" onclick="openModal('manipulation')">Robot Manipulation</div>
+                <div class="skill-tag" onclick="openModal('circuit')">PCB Design & Circuitry</div>
+                <div class="skill-tag" onclick="openModal('sensors')">Sensor Integration</div>
             </div>
         </div>
     </section>
 
-    <section id="vision" class="section">
-        <h2>Conclusion & Career Strategy</h2>
-        <div style="max-width: 800px; margin: 0 auto;">
-            <p style="margin-bottom: 20px;">
-                My academic journey at LPU has focused on mastering the synergy between mechanical precision and control logic.
-            </p>
-            <p>
-                My ultimate goal is to lead innovations in industrial automation and defense robotics. 
-                I aim to transition my research into scalable industrial solutions that redefine efficiency in manufacturing.
-            </p>
-            <div class="btn-group" style="justify-content: center;">
-                <a href="mailto:johananand10f@gmail.com" class="btn">Establish Contact</a>
+    <section id="goals" class="section">
+        <div id="goals">
+            <h2>Career Goals</h2>
+            <div style="max-width: 800px; margin: 0 auto; color: var(--text-dim); font-size: 1.2rem; font-weight: 300;">
+                <p style="margin-bottom: 1.5rem;">
+                    Through my academic journey at LPU, I have developed a strong foundation in both mechanical design and autonomous control. 
+                    My experience ranging from competitive robotics to Finite Element Analysis has prepared me to tackle complex mechatronic challenges.
+                </p>
+                <p>
+                    My ultimate goal is to contribute to the next generation of industrial automation and defense robotics. 
+                    I aim to deepen my expertise in <strong>Embedded Systems</strong> and <strong>Robot Manipulation</strong>, transitioning academic projects into scalable industrial solutions.
+                </p>
+            </div>
+            <div class="btn-group" style="justify-content: center; margin-top: 4rem;">
+                <a href="mailto:johananand10f@gmail.com" class="btn btn-primary">Establish Contact</a>
+                <a href="https://www.linkedin.com/in/johanlpu" class="btn btn-secondary" target="_blank">LinkedIn</a>
             </div>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 JOHAN // SYSTEM_USER_ENGINEER // LPU_MECHATRONICS
+        &copy; 2026 Johan | Built for Mechatronic Precision
     </footer>
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" style="color: var(--accent); margin-bottom: 20px;"></h3>
-            <p id="modalDesc" style="color: var(--text-dim);"></p>
+            <h3 id="modalTitle" style="color: var(--accent); margin-bottom: 1.5rem; font-size: 2rem; letter-spacing: -1px;"></h3>
+            <p id="modalDesc" style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8;"></p>
         </div>
     </div>
 
     <script>
         const data = {
-            'line': { title: 'Line Follower', desc: 'Autonomous robot utilizing IR sensor arrays and PID control for precise navigation.' },
-            'calc': { title: 'Binary Calculator', desc: 'Hardware-based 4-bit arithmetic unit utilizing logic gates.' },
-            'fea': { title: 'Mechanical FEA', desc: 'Stress analysis and structural simulation of mechanical joints.' },
-            'python': { title: 'Python', desc: 'Used for automation and robotics data processing.' },
-            'matlab': { title: 'MATLAB', desc: 'System modeling and control system simulation tool.' },
-            'micro': { title: 'Microcontrollers', desc: 'Programming Arduino and ESP32 for mechatronic automation.' }
+            'line': { title: 'Line Follower', desc: 'An autonomous robot utilizing an IR sensor array and a PID control loop for smooth navigation. Designed to minimize overshoot and handle sharp curves effectively.' },
+            'calc': { title: 'Binary Calculator', desc: 'A hardware-based calculator utilizing logic gates to perform 4-bit binary operations.' },
+            'fea': { title: 'Mechanical Design & FEA', desc: 'Structural analysis of components like Knuckle Joints and Bell Crank Levers performed using SimScale to ensure mechanical safety factors.' },
+            'robirace': { title: 'Robi Race', desc: 'Cognitia competition focusing on high-speed autonomous navigation and path correction.' },
+            'robosoccer': { title: 'Robo Soccer', desc: 'Competitive sports engineering requiring multi-robot coordination and strategic control.' },
+            'robosumo': { title: 'Robo Sumo', desc: 'Design for high-torque pushing and structural durability in a competitive environment.' },
+            'mechdesign': { title: 'Mechanical Design', desc: 'Competitive CAD modeling and simulation of machine elements under variable load.' },
+            'python': { title: 'Python', desc: 'Used for automation, data processing, and robotics simulation.' },
+            'matlab': { title: 'MATLAB/Simulink', desc: 'Primary tools for modeling dynamic systems and designing control loops.' },
+            'simscale': { title: 'SimScale', desc: 'Cloud-based FEA for structural and thermal simulation of mechanical parts.' },
+            'micro': { title: 'Microcontrollers', desc: 'Programming Arduino and ESP32 for real-world automation.' },
+            'manipulation': { title: 'Robot Manipulation', desc: 'In-depth study of kinematics and trajectory planning for robotic arms.' }
         };
 
         function openModal(id) {
-            const item = data[id] || { title: id, desc: 'Technical specifications logged in system.' };
+            const item = data[id] || { title: id, desc: 'Technical details coming soon.' };
             document.getElementById('modalTitle').innerText = item.title;
             document.getElementById('modalDesc').innerText = item.desc;
-            document.getElementById('infoModal').style.display = "block";
+            document.getElementById('infoModal').style.display = 'block';
         }
-        function closeModal() { document.getElementById('infoModal').style.display = "none"; }
-        window.onclick = function(e) { if (e.target.className === "modal") closeModal(); }
+
+        function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
+        window.onclick = function(e) { if (e.target.className === 'modal') closeModal(); }
     </script>
 </body>
 </html>
