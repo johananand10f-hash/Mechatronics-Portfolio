@@ -25,7 +25,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Hero Section - Initial Landing */
+        /* Hero Section - The Front Page Introduction */
         #hero {
             height: 100vh;
             display: flex;
@@ -39,10 +39,17 @@
 
         .hero-label { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 1rem; }
         h1 { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -2px; }
-        .hero-sub { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 2rem; }
+        .hero-sub { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+        
+        .hero-intro {
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
 
         /* Navigation Buttons */
-        .btn-group { display: flex; gap: 15px; margin-top: 2rem; }
+        .btn-group { display: flex; gap: 15px; margin-top: 1rem; }
         .btn { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: var(--transition); cursor: pointer; }
         .btn-primary { background-color: var(--accent); color: var(--bg); }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 209, 178, 0.3); }
@@ -84,10 +91,14 @@
         <div class="hero-label">Mechatronics Engineering Portfolio</div>
         <h1>JOHAN</h1>
         <p class="hero-sub">Embedded Systems | Robotics Enthusiast</p>
+        <p class="hero-intro">
+            I am a third-year Mechatronics Engineering student at Lovely Professional University. 
+            My work is driven by a passion for robotics and industrial automation, bridging the gap between hardware and intelligent software.
+        </p>
         <div class="btn-group">
             <a href="#projects" class="btn btn-primary">Projects</a>
-            <a href="#competitions" class="btn btn-secondary">Competitions</a>
-            <a href="#skills" class="btn btn-secondary">Technical Skills</a>
+            <a href="#skills" class="btn btn-secondary">Skills</a>
+            <a href="#goals" class="btn btn-secondary">Vision</a>
         </div>
     </section>
 
@@ -158,12 +169,21 @@
         </div>
     </section>
 
-    <section id="contact" class="section" style="text-align: center; min-height: auto;">
-        <h2>Let's Connect</h2>
-        <p style="margin-bottom: 2rem; color: var(--text-dim);">Open to internship opportunities and industrial collaborations.</p>
-        <div class="btn-group" style="justify-content: center;">
+    <section id="goals" class="section" style="text-align: center;">
+        <h2>Conclusion & Career Goals</h2>
+        <div style="max-width: 800px; margin: 0 auto; color: var(--text-dim); font-size: 1.1rem;">
+            <p style="margin-bottom: 1.5rem;">
+                Through my academic journey at LPU, I have developed a strong foundation in both mechanical design and autonomous control. 
+                My experience ranging from competitive robotics to Finite Element Analysis has prepared me to tackle complex mechatronic challenges.
+            </p>
+            <p>
+                My ultimate goal is to contribute to the next generation of industrial automation and defense robotics. 
+                I aim to deepen my expertise in **Embedded Systems** and **Robot Manipulation**, transitioning from academic projects to scalable industrial solutions that enhance global manufacturing efficiency.
+            </p>
+        </div>
+        <div class="btn-group" style="justify-content: center; margin-top: 3rem;">
             <a href="mailto:johananand10f@gmail.com" class="btn btn-primary">Email Me</a>
-            <a href="https://www.linkedin.com/in/johanlpu" class="btn btn-secondary">LinkedIn Profile</a>
+            <a href="https://www.linkedin.com/in/johanlpu" class="btn btn-secondary" target="_blank">LinkedIn</a>
         </div>
     </section>
 
@@ -181,22 +201,22 @@
 
     <script>
         const data = {
-            'line': { title: 'Line Follower', desc: 'An autonomous robot utilizing an IR sensor array and a PID control loop for smooth navigation. Designed to minimize overshoot and handle sharp curves effectively.' },
-            'calc': { title: 'Binary Calculator', desc: 'A hardware-based calculator utilizing logic gates (XOR, AND, OR) to perform 4-bit binary addition and subtraction.' },
-            'fea': { title: 'Mechanical Design & FEA', desc: 'Structural analysis of Knuckle Joints and Bell Crank Levers performed using SimScale. Focused on stress distribution and mechanical safety factors.' },
-            'robirace': { title: 'Robi Race', desc: 'High-speed autonomous navigation competition focusing on sensor accuracy and real-time path correction algorithms.' },
-            'robosoccer': { title: 'Robo Soccer', desc: 'Robotic sports competition requiring high-torque motor control and strategic manual/autonomous coordination.' },
-            'robosumo': { title: 'Robo Sumo', desc: 'Strength-based robotics competition requiring heavy traction, structural durability, and defensive logic.' },
-            'mechdesign': { title: 'Mechanical Design Challenge', desc: 'Competitive CAD modeling and simulation of mechanical joints and linkages under variable load conditions.' },
-            'python': { title: 'Python Programming', desc: 'Used for automation, data processing, and developing robotics simulation tools.' },
-            'matlab': { title: 'MATLAB & Simulink', desc: 'Core tools used for modeling dynamic systems and designing feedback control loops.' },
-            'simscale': { title: 'SimScale FEA', desc: 'Cloud-based Finite Element Analysis for structural and thermal simulation of machine parts.' },
-            'micro': { title: 'Embedded Systems', desc: 'Programming and hardware integration of microcontrollers like Arduino and ESP32 for real-world automation.' },
-            'manipulation': { title: 'Robot Manipulation', desc: 'In-depth study of kinematics and trajectory planning for industrial robotic arms.' }
+            'line': { title: 'Line Follower', desc: 'An autonomous robot utilizing an IR sensor array and a PID control loop for smooth navigation.' },
+            'calc': { title: 'Binary Calculator', desc: 'A hardware-based calculator utilizing logic gates to perform 4-bit binary operations.' },
+            'fea': { title: 'Mechanical Design & FEA', desc: 'Structural analysis of components like Knuckle Joints using SimScale to ensure mechanical safety factors.' },
+            'robirace': { title: 'Robi Race', desc: 'Cognitia competition focusing on high-speed autonomous navigation and path correction.' },
+            'robosoccer': { title: 'Robo Soccer', desc: 'Competitive sports engineering requiring multi-robot coordination and strategic control.' },
+            'robosumo': { title: 'Robo Sumo', desc: 'Design for high-torque pushing and structural durability in a competitive environment.' },
+            'mechdesign': { title: 'Mechanical Design', desc: 'Competitive CAD modeling and simulation of machine elements under variable load.' },
+            'python': { title: 'Python', desc: 'Used for automation, data processing, and robotics simulation.' },
+            'matlab': { title: 'MATLAB/Simulink', desc: 'Primary tools for modeling dynamic systems and designing control loops.' },
+            'simscale': { title: 'SimScale', desc: 'Cloud-based FEA for structural and thermal simulation of mechanical parts.' },
+            'micro': { title: 'Microcontrollers', desc: 'Programming Arduino and ESP32 for real-world automation.' },
+            'manipulation': { title: 'Robot Manipulation', desc: 'In-depth study of kinematics and trajectory planning for robotic arms.' }
         };
 
         function openModal(id) {
-            const item = data[id] || { title: id, desc: 'Technical documentation for ' + id + ' coming soon.' };
+            const item = data[id] || { title: id, desc: 'Technical details coming soon.' };
             document.getElementById('modalTitle').innerText = item.title;
             document.getElementById('modalDesc').innerText = item.desc;
             document.getElementById('infoModal').style.display = 'block';
