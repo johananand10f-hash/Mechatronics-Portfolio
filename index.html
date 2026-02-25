@@ -9,20 +9,29 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; scroll-behavior: smooth; }
         header { padding: 4rem 2rem; text-align: center; background: linear-gradient(to bottom, #1e293b, var(--bg)); }
         .container { max-width: 900px; margin: auto; padding: 0 20px; }
-        h1 { font-size: 3rem; margin: 0; color: var(--accent); }
+        h1 { font-size: 3.5rem; margin: 0; color: var(--accent); letter-spacing: 2px; }
         .section { padding: 4rem 0; border-bottom: 1px solid #334155; }
+        
+        /* Interactive Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .card { background: var(--card); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .tag { font-size: 0.8rem; background: #0ea5e9; color: white; padding: 2px 8px; border-radius: 4px; margin-right: 5px; }
-        .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-item { border: 1px solid var(--accent); padding: 5px 15px; border-radius: 20px; color: var(--accent); }
+        .card { background: var(--card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--accent); cursor: pointer; transition: 0.3s; position: relative; }
+        .card:hover { transform: translateY(-10px); background: #2d3748; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .card::after { content: 'Click for Details →'; position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: var(--accent); opacity: 0.7; }
+
+        /* Clickable Skills */
+        .skills-list { display: flex; flex-wrap: wrap; gap: 12px; }
+        .skill-item { border: 1px solid var(--accent); padding: 8px 18px; border-radius: 25px; color: var(--accent); cursor: pointer; transition: 0.3s; font-weight: 500; }
+        .skill-item:hover { background: var(--accent); color: var(--bg); transform: scale(1.1); }
+
+        /* Modal Logic */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background: var(--card); margin: 10% auto; padding: 2rem; border-radius: 15px; width: 80%; max-width: 600px; border: 1px solid var(--accent); animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close { float: right; font-size: 2rem; cursor: pointer; color: var(--text-dim); }
+        .close:hover { color: var(--accent); }
+
         .contact-link { color: var(--accent); text-decoration: none; font-weight: bold; border: 1px solid var(--accent); padding: 12px 24px; border-radius: 5px; display: inline-block; margin-top: 15px; transition: 0.3s; }
         .contact-link:hover { background: var(--accent); color: var(--bg); }
-        .email-text { color: var(--accent); text-decoration: none; font-weight: 500; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-        td { border-bottom: 1px solid #334155; padding: 8px 0; color: var(--text-dim); }
-        .spec-label { color: var(--accent); font-weight: bold; width: 45%; }
     </style>
 </head>
 <body>
@@ -35,40 +44,23 @@
 <div class="container">
     <section class="section">
         <h2>About Me</h2>
-        <p>I am a third-year Mechatronics Engineering student specializing in the intersection of mechanical design and intelligent automation. My approach combines rigorous mathematical modeling with hands-on hardware implementation to create efficient, autonomous systems.</p>
+        <p>I am a third-year Mechatronics Engineering student specializing in the intersection of mechanical design and intelligent automation. My approach combines rigorous mathematical modeling with hands-on hardware implementation.</p>
     </section>
 
     <section class="section">
         <h2>Mechatronics Projects</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card" onclick="openModal('line')">
                 <h3>Line Following Robot</h3>
-                <p>Autonomous robot using IR sensor arrays and PID control for precise path tracking.</p>
-                <table>
-                    <tr><td class="spec-label">Controller</td><td>Arduino</td></tr>
-                    <tr><td class="spec-label">Algorithm</td><td>PID Control</td></tr>
-                </table>
-                <p><span class="tag">Robotics</span><span class="tag">Sensors</span></p>
+                <p>Autonomous robot using IR sensor arrays and PID control.</p>
             </div>
-
-            <div class="card">
-                <h3>Binary Arithmetic Calculator</h3>
-                <p>Digital logic system performing basic math using combinational circuits and logic gates.</p>
-                <table>
-                    <tr><td class="spec-label">Logic</td><td>AND, OR, XOR</td></tr>
-                    <tr><td class="spec-label">Design</td><td>Combinational</td></tr>
-                </table>
-                <p><span class="tag">Digital Electronics</span><span class="tag">Logic</span></p>
+            <div class="card" onclick="openModal('calc')">
+                <h3>Binary Calculator</h3>
+                <p>Digital logic system for fundamental binary arithmetic.</p>
             </div>
-
-            <div class="card">
+            <div class="card" onclick="openModal('fea')">
                 <h3>Machine Design & FEA</h3>
-                <p>Analysis of mechanical components like Knuckle Joints and Bell Crank Levers.</p>
-                <table>
-                    <tr><td class="spec-label">Analysis</td><td>Finite Element (FEA)</td></tr>
-                    <tr><td class="spec-label">Tools</td><td>CAD / SimScale</td></tr>
-                </table>
-                <p><span class="tag">CAD</span><span class="tag">SimScale</span></p>
+                <p>Structural analysis of Knuckle Joints and Bell Crank Levers.</p>
             </div>
         </div>
     </section>
@@ -76,26 +68,65 @@
     <section class="section">
         <h2>Technical Skill Set</h2>
         <div class="skills-list">
-            <span class="skill-item">Robot Manipulation</span>
-            <span class="skill-item">Control Systems</span>
-            <span class="skill-item">Python</span>
-            <span class="skill-item">C Programming</span>
-            <span class="skill-item">MATLAB & Simulink</span>
-            <span class="skill-item">SQL</span>
+            <div class="skill-item" onclick="openModal('robotics')">Robot Manipulation</div>
+            <div class="skill-item" onclick="openModal('control')">Control Systems</div>
+            <div class="skill-item" onclick="openModal('python')">Python</div>
+            <div class="skill-item" onclick="openModal('cpp')">C Programming</div>
+            <div class="skill-item" onclick="openModal('matlab')">MATLAB & Simulink</div>
         </div>
+    </section>
+
+    <section class="section">
+        <h2>Vision & Career Goals</h2>
+        <p>My goal is to contribute to the next generation of industrial automation and robotics. I am focusing on deepening my expertise in <b>Embedded Systems</b> and <b>Robot Manipulation</b>, transitioning from academic projects to scalable industrial solutions in the manufacturing and defense sectors.</p>
     </section>
 
     <section id="contact" class="section">
         <h2>Contact Me</h2>
-        <p>I am open to discussing robotics projects, industrial automation, or internship opportunities.</p>
-        <p><strong>Email:</strong> <a href="mailto:johananand10f@gmail.com" class="email-text">johananand10f@gmail.com</a></p>
-        <a href="https://www.linkedin.com/in/johanlpu?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="contact-link" target="_blank">Connect on LinkedIn</a>
+        <p>I am always open to discussing robotics projects or internship opportunities.</p>
+        <p><strong>Email:</strong> <a href="mailto:johananand10f@gmail.com" style="color:var(--accent); text-decoration:none;">johananand10f@gmail.com</a></p>
+        <a href="https://www.linkedin.com/in/johanlpu" class="contact-link" target="_blank">Connect on LinkedIn</a>
     </section>
 
     <footer>
-        <p>&copy; 2026 Johan | Mechatronics Portfolio</p>
+        <p style="text-align: center; color: var(--text-dim); padding: 20px;">&copy; 2026 Johan | Mechatronics Portfolio</p>
     </footer>
 </div>
+
+<div id="projectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle" style="color: var(--accent);"></h2>
+        <p id="modalDescription"></p>
+    </div>
+</div>
+
+<script>
+    const data = {
+        'line': { title: 'Line Following Robot', desc: 'Designed an autonomous robot that tracks a path using IR sensor arrays. Implemented a <b>PID control loop</b> to ensure smooth navigation at high speeds, minimizing oscillation and overshoot.' },
+        'calc': { title: 'Binary Arithmetic Calculator', desc: 'Constructed using combinational logic gates (AND, OR, XOR). This project focuses on the hardware realization of 4-bit addition and subtraction, showcasing foundational digital circuit design.' },
+        'fea': { title: 'Machine Design & FEA', desc: 'Conducted Finite Element Analysis (FEA) on mechanical joints using <b>SimScale</b> and CAD tools. Focused on stress distribution and safety factors for Knuckle Joints and Bell Crank Levers.' },
+        'robotics': { title: 'Robot Manipulation', desc: 'Expertise in robot kinematics, trajectory planning, and actuator selection for industrial robotic arms.' },
+        'control': { title: 'Control Systems', desc: 'Proficient in designing feedback control loops, analyzing system stability, and implementing compensators using transfer functions.' },
+        'python': { title: 'Python Programming', desc: 'Experienced in using Python for data analysis, automation scripts, and developing functional Discord bots.' },
+        'cpp': { title: 'C Programming', desc: 'Strong foundation in C for embedded systems and microcontroller programming.' },
+        'matlab': { title: 'MATLAB & Simulink', desc: 'Used extensively for system modeling, simulations of dynamic systems, and control logic verification.' }
+    };
+
+    function openModal(id) {
+        document.getElementById('modalTitle').innerText = data[id].title;
+        document.getElementById('modalDescription').innerHTML = data[id].desc;
+        document.getElementById('projectModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('projectModal')) { closeModal(); }
+    }
+</script>
 
 </body>
 </html>
