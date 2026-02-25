@@ -79,8 +79,8 @@
         #goals { text-align: center; background: #080808; border: 1px solid var(--card-border); padding: 80px 40px; border-radius: 8px; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; backdrop-filter: blur(10px); }
-        .modal-content { background: var(--card-bg); margin: 10% auto; padding: 4rem; border-radius: 4px; max-width: 650px; width: 90%; border: 1px solid var(--accent); }
-        .close { float: right; cursor: pointer; font-size: 2.5rem; color: var(--text-dim); line-height: 1; }
+        .modal-content { background: var(--card-bg); margin: 10% auto; padding: 4rem; border-radius: 4px; max-width: 650px; width: 90%; border: 1px solid var(--accent); position: relative; }
+        .close { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 2.5rem; color: var(--text-dim); line-height: 1; transition: color 0.3s; }
         .close:hover { color: var(--accent); }
 
         footer { padding: 60px; text-align: center; color: #444; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -196,7 +196,7 @@
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" id="closeBtn">&times;</span>
             <h3 id="modalTitle" style="color: var(--accent); margin-bottom: 1.5rem; font-size: 2rem; letter-spacing: -1px;"></h3>
             <p id="modalDesc" style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8;"></p>
         </div>
@@ -212,21 +212,37 @@
             'robosumo': { title: 'Robo Sumo', desc: 'Design for high-torque pushing and structural durability in a competitive environment.' },
             'mechdesign': { title: 'Mechanical Design', desc: 'Competitive CAD modeling and simulation of machine elements under variable load.' },
             'python': { title: 'Python', desc: 'Used for automation, data processing, and robotics simulation.' },
+            'cpp': { title: 'C / C++', desc: 'Standard languages for embedded systems and real-time controller development.' },
             'matlab': { title: 'MATLAB/Simulink', desc: 'Primary tools for modeling dynamic systems and designing control loops.' },
+            'sql': { title: 'SQL', desc: 'Management of structured databases for mechatronics system logs.' },
+            'cad': { title: 'SolidWorks / AutoCAD', desc: 'Advanced 3D modeling and drafting of mechanical assemblies.' },
             'simscale': { title: 'SimScale', desc: 'Cloud-based FEA for structural and thermal simulation of mechanical parts.' },
             'micro': { title: 'Microcontrollers', desc: 'Programming Arduino and ESP32 for real-world automation.' },
-            'manipulation': { title: 'Robot Manipulation', desc: 'In-depth study of kinematics and trajectory planning for robotic arms.' }
+            'control': { title: 'Control Systems', desc: 'Implementing feedback control loops and analyzing system stability.' },
+            'manipulation': { title: 'Robot Manipulation', desc: 'In-depth study of kinematics and trajectory planning for robotic arms.' },
+            'circuit': { title: 'PCB Design', desc: 'Designing custom printed circuit boards for sensor integration and power management.' },
+            'sensors': { title: 'Sensor Integration', desc: 'Interfacing IR, ultrasonic, and IMU sensors with microcontrollers for environment perception.' }
         };
 
+        const modal = document.getElementById('infoModal');
+        const closeBtn = document.getElementById('closeBtn');
+
         function openModal(id) {
-            const item = data[id] || { title: id, desc: 'Technical details coming soon.' };
+            const item = data[id];
             document.getElementById('modalTitle').innerText = item.title;
             document.getElementById('modalDesc').innerText = item.desc;
-            document.getElementById('infoModal').style.display = 'block';
+            modal.style.display = 'block';
         }
 
-        function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
-        window.onclick = function(e) { if (e.target.className === 'modal') closeModal(); }
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        closeBtn.onclick = closeModal;
+        
+        window.onclick = function(e) {
+            if (e.target === modal) closeModal();
+        }
     </script>
 </body>
 </html>
